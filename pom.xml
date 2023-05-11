@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <name>Nwolfhub utils</name>
     <description>Library to stop writing same code for too many times</description>
+    <url>https://github.com/nwolfhub/easycli</url>
     <scm>
         <url>
             git@github.com:nwolfhub/utils.git
