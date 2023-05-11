@@ -1,4 +1,4 @@
-package org.nwolfhub;
+package org.nwolfhub.utils;
 
 import java.util.HashMap;
 import java.util.Random;
