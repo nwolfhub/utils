@@ -36,4 +36,12 @@ public class Utils {
     public static HashMap<String, String> parseValues(String text, String separator) {
         return parseValues(text.split(separator));
     }
+
+    public static String buildConnectionString(String address, Integer port, String database) {
+        return "jdbc:postgresql://" + address + ":" + port + "/" + database;
+    }
+    public static String buildConnectionString(String driver, String address, Integer port, String database) {
+        return "jdbc: " + driver + "://" + address + ":" + port + "/" + database;
+    }
+
 }
