@@ -59,6 +59,9 @@ public class Configurator {
             throw new RuntimeException(e);
         }
     }
+    public int getEntriesAmount() {
+        return parsed.size();
+    }
 
     private void print(String text) {
         if(cli!=null) {
