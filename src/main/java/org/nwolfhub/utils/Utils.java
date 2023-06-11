@@ -1,5 +1,9 @@
 package org.nwolfhub.utils;
 
+import jakarta.xml.bind.DatatypeConverter;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -42,6 +46,14 @@ public class Utils {
     }
     public static String buildConnectionString(String driver, String address, Integer port, String database) {
         return "jdbc: " + driver + "://" + address + ":" + port + "/" + database;
+    }
+    public static String hashString(String text, String algorithm) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance(algorithm);
+        return DatatypeConverter.printBase64Binary(digest.digest(text.getBytes()));
+    }
+
+    public static String hashString(String text) throws NoSuchAlgorithmException {
+        return hashString(text, "SHA-256");
     }
 
 }
