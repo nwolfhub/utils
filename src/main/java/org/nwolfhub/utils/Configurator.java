@@ -29,6 +29,16 @@ public class Configurator {
         readConfig();
     }
 
+    public Configurator(File configFile, String defaultConfig) {
+        this.configFile = configFile;
+        try {
+            createConfigIfNotExists(defaultConfig);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        readConfig();
+    }
+
     public Configurator(File configFile) {
         this.configFile = configFile;
         readConfig();
