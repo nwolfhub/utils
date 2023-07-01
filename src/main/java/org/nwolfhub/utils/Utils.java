@@ -56,4 +56,41 @@ public class Utils {
         return hashString(text, "SHA-256");
     }
 
+    public static void typeText(String prevText, boolean remove, String pretext, String text, int delayBetween, int removeDelay, int midDelay, TextAction action) {
+        new Thread(() -> {
+            if(remove) {
+                StringBuilder actual = new StringBuilder(prevText);
+                while (actual.length()>0) {
+                    actual.setLength(actual.length() - 1);
+                    action.applyText(action.toString());
+                    try {
+                        Thread.sleep(removeDelay);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            StringBuilder builder = new StringBuilder(pretext);
+            try {
+                Thread.sleep(midDelay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            String[] textSplit = text.split("");
+            for(int i = 0; i<text.length(); i++) {
+                builder.append(textSplit[i]);
+                try {
+                    Thread.sleep(delayBetween);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                action.applyText(builder.toString());
+            }
+        }).start();
+    }
+
+    public static void typeText(String text, int delayBetween, TextAction action) {
+        typeText("", false, "", text, delayBetween, 0, 0, action);
+    }
+
 }
