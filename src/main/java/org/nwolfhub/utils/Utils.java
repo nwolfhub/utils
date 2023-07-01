@@ -62,7 +62,7 @@ public class Utils {
                 StringBuilder actual = new StringBuilder(prevText);
                 while (actual.length()>0) {
                     actual.setLength(actual.length() - 1);
-                    action.applyText(action.toString());
+                    action.applyText(actual.toString());
                     try {
                         Thread.sleep(removeDelay);
                     } catch (InterruptedException e) {
