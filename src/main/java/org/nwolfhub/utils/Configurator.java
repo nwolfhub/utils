@@ -7,7 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Configurator {
     private HashMap<String, String> parsed;
@@ -55,6 +58,29 @@ public class Configurator {
 
     public String getValue(String key) {
         return parsed.get(key);
+    }
+
+    public String getSingleValue(String key) {
+        key = key.replace("*", ".+").replace("?", ".");
+        Pattern pattern = Pattern.compile(key);
+        for(String keyValue:parsed.keySet()) {
+            if(pattern.matcher(keyValue).matches()) {
+                return parsed.get(keyValue);
+            }
+        }
+        return null;
+    }
+
+    public List<String> getAllValues(String key) {
+        key = key.replace("*", ".+").replace("?", ".");
+        Pattern pattern = Pattern.compile(key);
+        List<String> result = new ArrayList<>();
+        for(String keyValue:parsed.keySet()) {
+            if(pattern.matcher(keyValue).matches()) {
+                result.add(parsed.get(keyValue));
+            }
+        }
+        return result;
     }
 
     public void reloadConfig() {
