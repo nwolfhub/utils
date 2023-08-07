@@ -83,6 +83,29 @@ public class Configurator {
         return result;
     }
 
+    public String getSingleKey(String pattern) {
+        pattern = pattern.replace("*", ".+").replace("?", ".");
+        Pattern compiled = Pattern.compile(pattern);
+        for(String keyValue:parsed.keySet()) {
+            if(compiled.matcher(keyValue).matches()) {
+                return keyValue;
+            }
+        }
+        return null;
+    }
+    public List<String> getAllKeys(String pattern) {
+        pattern = pattern.replace("*", ".+").replace("?", ".");
+        Pattern compiled = Pattern.compile(pattern);
+        List<String> result = new ArrayList<>();
+        for(String keyValue:parsed.keySet()) {
+            if(compiled.matcher(keyValue).matches()) {
+                result.add(keyValue);
+            }
+        }
+        return result;
+    }
+
+
     public void reloadConfig() {
         readConfig();
     }
