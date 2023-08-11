@@ -105,6 +105,10 @@ public class Configurator {
         return result;
     }
 
+    public boolean containsKey(String key) {
+        return (getSingleKey(key)!=null);
+    }
+
 
     public void reloadConfig() {
         readConfig();
